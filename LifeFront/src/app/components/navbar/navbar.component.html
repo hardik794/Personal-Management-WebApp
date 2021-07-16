@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <button *ngIf="!isLoggedIn" [routerLink]="'/'" mat-icon-button class="example-icon"
+    aria-label="Example icon-button with menu icon">
+    <mat-icon>leaderboard
+    </mat-icon>
+  </button>
+
+  <span>Easy Life</span>
+  <span class="example-spacer"></span>
+
+
+  <!-- <button mat-icon-button class="mx-2" [matMenuTriggerFor]="menu">
+    <mat-icon>format_color_fill</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" xPosition="before">
+    <mat-radio-group class="example-radio-group" aria-label="Select an option">
+      <mat-radio-button class="example-radio-button" value="1">Dark Theme Theme</mat-radio-button>
+      <mat-radio-button class="example-radio-button" value="2">Light Theme Theme</mat-radio-button>
+    </mat-radio-group>
+  </mat-menu> -->
+
+  <button *ngIf="!isLoggedIn" [routerLink]="'/login'" mat-raised-button class="mx-2" aria-label="login icon">
+    Login<mat-icon>login</mat-icon>
+  </button>
+
+  <button (click)="logout()" *ngIf="isLoggedIn" mat-raised-button color="accent" class="mx-2" aria-label="login icon">
+    Logout
+  </button>
+
+</mat-toolbar>

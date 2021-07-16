@@ -1,0 +1,86 @@
+<div class="m-3">
+  <div class="row">
+    <div class="col d-flex align-items-center">
+      <span class="mx-3 my-3 fs-4">Add Files Here</span>
+    </div>
+    <div class="col-md-auto d-flex align-items-center">
+      <mat-form-field appearance="outline" class="mx-3">
+        <mat-label>Search By Category</mat-label>
+        <mat-select [(value)]="selected" [(ngModel)]="cat">
+          <mat-option value="All">All</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-mini-fab color="warn" data-bs-toggle="modal" data-bs-target="#files">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-12">
+    <ng-container  *ngFor="let file of files; let i = index">
+      <div class="col-md-4 my-2" *ngIf="cat === file.caterogy || cat === 'All' ">
+          <img [src]="file.files">
+        </div>
+        </ng-container>
+  </div>
+</div>
+<!-- <mat-accordion>
+    <div class="container my-3">
+      <div class="row">
+        <ng-container  *ngFor="let file of file; let i = index">
+        <div class="col-md-4 my-2" *ngIf="cat === file.caterogy || cat === 'All' ">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{note.title}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>{{note.description}}</p>
+              <mat-action-row>
+                  <button mat-button color="primary"> Update</button>
+                  <button mat-button color="warn">Delete</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </div>
+      </ng-container>
+      </div>
+    </div>
+  </mat-accordion> -->
+
+<!-- Modal -->
+<div class="modal fade" id="files" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">{{data.fileName}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="file" [(ngModel)]="data.files" name="files" required>
+
+        <form (ngSubmit)="fileSubmit()">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input type="text" matInput placeholder="My Notes" [(ngModel)]="data.fileName" name="fileName" required>
+          </mat-form-field>
+
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select name="caterogy" [(ngModel)]="data.caterogy" required>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="modal-footer mt-3">
+            <button type="submit" mat-raised-button color="primary" class="w-100 py-1">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

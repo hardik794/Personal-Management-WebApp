@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+<mat-sidenav-container class="sidenav-container mt-6">
+  <mat-sidenav #drawer class="sidenav mt-6" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <div class="container">
+      <div class="row mt-3 mb-2">
+        <div class="col-3 me-1">
+          <div class="example-button-container">
+            <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
+              <span class="fs-1 profile-tag">{{ login.getUser().firstname.charAt(0).toUpperCase()}}</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-8 my-auto">
+          <span class="fs-5">{{ login.getUser().username }}</span><br>
+          <span class="font-monospace text-muted">{{ login.getUser().phone }}</span>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/user" (click)="getName('Profile')"
+        [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon class="ms-2">account_circle</mat-icon>&ensp;Profile
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="money" (click)="getName('Money Record')">
+        <mat-icon class="ms-2">account_balance_wallet</mat-icon>&ensp;Money Record
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="notes" (click)="getName('Notes')">
+        <mat-icon class="ms-2">note_add</mat-icon>&ensp;Add Notes
+      </mat-list-item>
+      <!-- <mat-list-item role="listitem" routerLinkActive="active" routerLink="files" (click)="getName('Files')">
+        <mat-icon class="ms-2">attach_file</mat-icon>&ensp;Add Files
+      </mat-list-item> -->
+      <!-- <mat-list-item role="listitem" routerLinkActive="active" routerLink="feedback" (click)="getName('FeedBack')">
+        <mat-icon class="ms-2">message</mat-icon>&ensp;FeedBack
+      </mat-list-item> -->
+      <mat-list-item role="listitem" (click)="logout()">
+        <mat-icon class="ms-2">logout</mat-icon>&ensp;Logout
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{link || 'Profile'}}</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

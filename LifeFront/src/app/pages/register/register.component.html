@@ -1,0 +1,110 @@
+
+<div class="bootstrap-wrapper vertical-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <mat-card>
+
+          <div class="container text-center mt-2">
+            <img src="../../../assets/iconh.png" alt="icon">
+          </div>
+          <h1 class="text-center" style="margin-top:10px;font-weight: 500;">Register Here</h1>
+          <form (ngSubmit)="formSubmit()">
+            <div class="row">
+
+              <div class="col-md-6">
+                <!-- first name -->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>First Name</mat-label>
+                  <input [(ngModel)]="user.firstname" matInput placeholder="Enter First Name" name="firstname" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <!-- last name -->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input [(ngModel)]="user.lastname" matInput placeholder="Enter Last Name" name="lastname" required>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- username -->
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input [(ngModel)]="user.username" matInput placeholder="Enter Unique UserName" name="username" required>
+              <!-- <mat-hint>User Name must be unique!</mat-hint> -->
+            </mat-form-field>
+
+            <!-- password -->
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User Password</mat-label>
+              <input [(ngModel)]="user.password" [type]="hide ? 'password' : 'text'" matInput
+                placeholder="Enter Password" name="password" required>
+              <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </a>
+            </mat-form-field>
+
+            <!-- confirm password -->
+            <!-- <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" matInput placeholder="Confirm Password" name="confirmpassword" required>
+          </mat-form-field> -->
+
+            <!-- email -->
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User Email</mat-label>
+              <input [(ngModel)]="user.email" type="email" matInput placeholder="Ex. pat@example.com" name="email"
+                required>
+            </mat-form-field>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <!-- phone -->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>User Phone Number</mat-label>
+                  <input [(ngModel)]="user.phone" type="number" pattern="[0-9]{10}" matInput
+                    placeholder="Enter User Phone Number" name="phone" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <!-- gender -->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Gender</mat-label>
+                  <mat-select [(ngModel)]="user.gender" name="gender" required>
+                    <mat-option value="male">Male</mat-option>
+                    <mat-option value="female">Female</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row">
+
+              <div class="col-md-12">
+                <button type="submit" mat-raised-button color="primary" class="w-100 py-1">Register Now</button>
+              </div>
+            </div>
+
+            <div class="container text-center my-3">
+              <span>Already have an account? <a [routerLink]="'/login'">Sign In</a></span>
+            </div>
+
+          </form>
+          <div class="container text-center">
+            <div class="example-button-container">
+              <button [routerLink]="'/'" mat-mini-fab color="accent" aria-label="Home icon" matTooltip="go to home"
+                matTooltipPosition="right">
+                <mat-icon>home</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

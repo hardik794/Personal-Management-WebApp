@@ -1,0 +1,172 @@
+<div class="m-3">
+  <div class="row">
+    <div class="col d-flex align-items-center">
+      <span class="mx-3 my-3 fs-4">Add Money Record</span>
+    </div>
+    <div class="col-md-auto d-flex align-items-center">
+      <!-- <input type="text" id="name" matInput placeholder="Search by Name" name="name" /> -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Search By Name</mat-label>
+        <mat-select name="filter" [(ngModel)]="name" required>
+          <mat-option value="All">All</mat-option>
+          <ng-container *ngFor="let rd of record">
+            <mat-option value="{{rd.name}}">{{rd.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button aria-label="Example icon button with a menu icon" class="me-4">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" data-bs-toggle="modal" data-bs-target="#money">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container my-3">
+  <div class="row">
+    <hr>
+    <ng-container *ngFor="let rec of record; let i = index">
+      <div class="col-md-12 my-2" *ngIf="name === rec.name || name === 'All' ">
+        <div class="row">
+          <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <span>{{rec.name}}</span>
+          </div>
+          <div class="col-md-3 d-flex align-items-center justify-content-center">
+            <span>{{rec.email}}</span>
+          </div>
+          <div class="col-md-3 d-flex align-items-center justify-content-center" *ngIf="rec.type === 'profit' ">
+            <span style="color: green;">{{rec.money}}</span>
+          </div>
+          <div class="col-md-3 d-flex align-items-center justify-content-center" *ngIf="rec.type === 'lose' ">
+            <span style="color: red;">{{rec.money}}</span>
+          </div>
+          <div class="col-md-3 d-flex align-items-center justify-content-center" *ngIf="rec.type === 'zero' ">
+            <span>{{rec.money}}</span>
+          </div>
+
+          <div class="col-md-1">
+            <button mat-button color="primary" data-bs-toggle="modal" [attr.data-bs-target]="'#add' + i">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="col-md-1">
+            <button mat-button color="primary" data-bs-toggle="modal" [attr.data-bs-target]="'#remove' + i">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+          <div class="col-md-2 d-flex justify-content-center">
+            <button mat-button color="warn" (click)="deleteRecord(rec.mID)">
+              delete
+            </button>
+          </div>
+        </div>
+
+        <div class="modal fade" [id]="'add' + i" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Update Money</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="recordUpdateAdd(rec)">
+
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Update Money</mat-label>
+                    <input type="number" min="0" matInput placeholder="Update Money" [(ngModel)]="rec.update"
+                      name="Money" required>
+                  </mat-form-field>
+
+                  <div class="modal-footer mt-3">
+                    <button type="submit" mat-raised-button color="primary" class="w-100 py-1">Add</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" [id]="'remove' + i" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Update Money</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="recordUpdateRemove(rec)">
+
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Update Money</mat-label>
+                    <input type="number" min="0" matInput placeholder="Update Money" [(ngModel)]="rec.update"
+                      name="Money" required>
+                  </mat-form-field>
+
+                  <div class="modal-footer mt-3">
+                    <button type="submit" mat-raised-button color="primary" class="w-100 py-1">Remove</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="money" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Add Friend</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="recordSubmit()">
+
+          <!-- Name -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput placeholder="Name" name="name" [(ngModel)]="moneyrecord.name" required>
+          </mat-form-field>
+
+          <!-- User Email -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput placeholder="Email" name="uname" [(ngModel)]="moneyrecord.email" required>
+          </mat-form-field>
+
+          <!-- Money -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Add Money</mat-label>
+            <input type="number" min="0" matInput placeholder="Add Money" name="money" [(ngModel)]="moneyrecord.money"
+              required>
+          </mat-form-field>
+
+          <!-- Profit or Lose -->
+          <!-- Category -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Profit or Lose</mat-label>
+            <mat-select name="type" [(ngModel)]="moneyrecord.type" required>
+              <mat-option value="profit">Profit</mat-option>
+              <mat-option value="lose">Lose</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="modal-footer mt-3">
+            <button type="submit" mat-raised-button color="primary" class="w-100 py-1">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

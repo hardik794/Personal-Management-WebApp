@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="row mt-3 mb-2">
+    <div class="col-md-6 my-2">
+      <mat-card>
+        <div class="row mt-3">
+          <div class="col-md-8">
+            <h1>Records</h1>
+          </div>
+          <div class="col-md-4 text-center">
+            <h1>{{recordlength}}</h1>
+          </div>
+        </div>
+        <!-- <mat-card-header>
+          <mat-card-title>
+            Records
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h1>{{recordlength}}</h1>
+        </mat-card-content> -->
+      </mat-card>
+    </div>
+    <div class="col-md-6 my-2">
+      <mat-card>
+        <div class="row mt-3">
+          <div class="col-md-8">
+            <h1>Notes</h1>
+          </div>
+          <div class="col-md-4 text-center">
+            <h1>{{notelength}}</h1>
+          </div>
+        </div>
+        <!-- <mat-card-header>
+          <mat-card-title>
+            Notes
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div>{{notelength}}</div>
+        </mat-card-content> -->
+      </mat-card>
+    </div>
+    <!-- <div class="col-md-4 my-2">
+        <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                Files
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div>{{filelength}}</div>
+            </mat-card-content>
+          </mat-card>
+    </div> -->
+
+    <div class="col-md-12 my-4">
+      <mat-card>
+        <mat-card-header class="my-3">
+          <mat-card-title>
+            <span class="display-6">Your Profile</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="my-3 mx-3">
+          <span class="h4">Username :</span><span class="h5 text-muted"> {{ user.username }}</span><br>
+          <span class="h4">Name :</span><span class="h5 text-muted"> {{ user.firstname }} {{user.lastname }}</span><br>
+          <span class="h4">email :</span><span class="h5 text-muted"> {{ user.email }}</span><br>
+          <span class="h4">phone :</span><span class="h5 text-muted"> {{ user.phone }}</span><br>
+          <span class="h4">gender :</span><span class="h5 text-muted"> {{ user.gender }}</span><br>
+
+          <!-- <button mat-stroked-button color="accent" data-bs-toggle="modal" data-bs-target="#update">Update</button> -->
+          <!-- <button mat-stroked-button color="primary">Change password</button> -->
+          
+
+        </mat-card-content>
+        <button class="my-3" mat-stroked-button color="warn" data-bs-toggle="modal" data-bs-target="#delete">Delete
+          Account</button>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <!-- Title -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input type="text" matInput placeholder="My Notes" name="Title" required>
+          </mat-form-field>
+
+
+          <!-- Description -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Note Description</mat-label>
+            <textarea matInput placeholder="My Notes Description" name="Description" required></textarea>
+          </mat-form-field>
+
+          <!-- Category -->
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select name="caterogy" required>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="modal-footer mt-3">
+            <button type="submit" mat-raised-button color="primary" class="w-100 py-1">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Account??</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        You Really Want to delete Your Account??
+      </div>
+      <div class="modal-footer">
+        <button mat-flat-button data-bs-dismiss="modal">No</button>
+        <button mat-stroked-button color="warn" data-bs-dismiss="modal"
+          (click)="deleteAcc(login.getUser().id)">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

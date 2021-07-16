@@ -1,0 +1,54 @@
+<div class="bootstrap-wrapper vertical-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <mat-card>
+
+          <div class="container text-center mt-3">
+            <img src="../../../assets/iconh.png" alt="icon">
+          </div>
+          <h1 class="text-center" style="margin-top:10px;font-weight: 500;">Login Here</h1>
+          <form (ngSubmit)="formSubmit()">
+
+            <!-- username -->
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input [(ngModel)]="loginData.username" matInput placeholder="Enter Unique UserName" name="username" required>
+            </mat-form-field>
+
+            <!-- password -->
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User Password</mat-label>
+              <input [(ngModel)]="loginData.password" [type]="hide ? 'password' : 'text'" matInput placeholder="Enter Password" name="password" required>
+              <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </a>
+            </mat-form-field>
+
+            <div class="row mb-4">
+              <div class="col-md-12">
+                <button mat-raised-button color="primary" class="w-100 py-1">Login Now</button>
+              </div>
+            </div>
+            <div class="container text-center my-2">
+              <span>Don't have an account? <a [routerLink]="'/signup'">Sign Up</a></span>
+            </div>
+            <div class="container text-center mb-3">
+              <span><a href="#" target="_blank">Forgot your password?</a></span>
+            </div>
+          </form>
+          <div class="container text-center">
+            <div class="example-button-container">
+              <button [routerLink]="'/'" mat-mini-fab color="accent" aria-label="Home icon" matTooltip="go to home"
+                matTooltipPosition="right">
+                <mat-icon>home</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+</div>
