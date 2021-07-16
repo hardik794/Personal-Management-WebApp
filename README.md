@@ -1,5 +1,5 @@
 # Personal-Management-WebApp
-In this Web App you should record daily notes and money record with youre friend and this system is fully authenticated with password encryption. 
+In this Web App you should record daily notes and money record with your friend and this system is fully authenticated with password encryption. 
 
 **Technology:**
 - Spring-Boot
